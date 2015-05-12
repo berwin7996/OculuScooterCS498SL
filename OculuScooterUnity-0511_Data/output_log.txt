@@ -1,0 +1,28 @@
+Initialize engine version: 4.6.4f1 (99f88340878d)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 670 (ID=0x1189)
+    Vendor:   NVIDIA
+    VRAM:     1985 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.069 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1280x1024 60Hz; virtual: 1280x1024 at 0,0
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 0.703637 ms
+Platform assembly: C:\Users\Berwin\Documents\OculuScooterUnity\OculuScooterCS498SL\OculuScooterUnity-0511_Data\Managed\UnityScript.Lang.dll (this message is harmless)

@@ -6,7 +6,7 @@ public class SerialRead : MonoBehaviour {
 
 	private static float angle;
 
-	SerialPort sp = new SerialPort("COM3", 9600);
+	private static SerialPort sp = new SerialPort("COM3", 9600);
 
 	// Use this for initialization
 	void Start () 
@@ -23,17 +23,18 @@ public class SerialRead : MonoBehaviour {
 			try 
 			{
 				angle = float.Parse(sp.ReadLine());
-//				print(angle);
 			}
 			catch(System.Exception)
 			{
 				sp.BaseStream.Flush();
 			}
-		}
+		}	
 	}
 
 	public static float GetAngle() 
 	{
 		return angle;
 	}
+
+
 }

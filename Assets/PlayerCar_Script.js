@@ -23,6 +23,8 @@ function Start () {
 	// I usually alter the center of mass to make the car more stable. I'ts less likely to flip this way.
 	rigidbody.centerOfMass += Vector3(0, -1.0, .15);
 
+	yield WaitForSeconds(1);
+	
 	initialAngle = SerialRead.GetAngle();
 }
 
