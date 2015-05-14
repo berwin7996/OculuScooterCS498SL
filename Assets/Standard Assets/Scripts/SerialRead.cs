@@ -6,7 +6,7 @@ public class SerialRead : MonoBehaviour {
 
 	private static float angle;
 
-	private static SerialPort sp = new SerialPort("COM3", 9600);
+	private static SerialPort sp = new SerialPort("COM6", 9600);
 
 	// Use this for initialization
 	void Start () 

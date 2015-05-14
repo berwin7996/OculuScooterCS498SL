@@ -19,13 +19,18 @@ private var EngineRPM : float = 0.0;
 
 var initialAngle : float;
 
+var w : WWW;
+var wIssuedAt : long = System.DateTime.Now.Ticks / 10000;
+
+var throttleValue : int = 0;
+
 function Start () {
 	// I usually alter the center of mass to make the car more stable. I'ts less likely to flip this way.
 	rigidbody.centerOfMass += Vector3(0, -1.0, .15);
-
-	yield WaitForSeconds(1);
 	
 	initialAngle = SerialRead.GetAngle();
+	
+//	gameObject.Find("player_graphic").animation.wrapMode = WrapMode.Once;
 }
 
 function Update () {
@@ -35,13 +40,13 @@ function Update () {
 	}
 	
 	if (Input.GetKeyDown(KeyCode.R)) {
-		print("Respawn");	
-		// TODO
+		print("Respawn");
+		
 	}
-
+	
 	// This is to limith the maximum speed of the car, adjusting the drag probably isn't the best way of doing it,
 	// but it's easy, and it doesn't interfere with the physics processing.
-	rigidbody.drag = rigidbody.velocity.magnitude / 250;
+	rigidbody.drag = rigidbody.velocity.magnitude * 1250;
 	
 	// Compute the engine RPM based on the average RPM of the two wheels, then call the shift gear function
 	EngineRPM = (FrontLeftWheel.rpm + FrontRightWheel.rpm)/2 * GearRatio[CurrentGear];
@@ -57,10 +62,18 @@ function Update () {
 
 	// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
 	// multiplied by the user input variable.
-	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-	FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * Input.GetAxis("Vertical");
-		
-	// the steer angle is an arbitrary value multiplied by the user input.
+	var normalizedThrottleValue : float = throttleValue / 10.0;
+	
+	var keyboardVerticalInput = Input.GetAxis("Vertical");
+	if (keyboardVerticalInput != 0) {
+		normalizedThrottleValue = keyboardVerticalInput / 2.0;
+	}
+	FrontLeftWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * normalizedThrottleValue;
+	FrontRightWheel.motorTorque = EngineTorque / GearRatio[CurrentGear] * normalizedThrottleValue;
+	
+	FrontLeftWheel.brakeTorque = 100;
+	FrontRightWheel.brakeTorque = 100;
+	
 	var keyboardHorizontalInput = Input.GetAxis("Horizontal");
 	if (keyboardHorizontalInput != 0) {
 		// the steer angle is an arbitrary value multiplied by the user input.
@@ -72,6 +85,51 @@ function Update () {
 		FrontRightWheel.steerAngle = theAngle;
 	}
 	
+//	print(theAngle);
+//	requestThrottleValue();
+//	print(SerialRead.GetAngle().ToString());
+	if (w == null || System.DateTime.Now.Ticks / 10000 - wIssuedAt > 1000) {
+//		print(normalizedThrottleValue + " " + rigidbody.velocity.magnitude);
+//		gameObject.Find("debugtext").GetComponentInChildren(TextMesh).text = "Speed: " + rigidbody.velocity.magnitude.ToString("F1") + " Throttle: "+ (normalizedThrottleValue).ToString("F1")+ " Steering: "+(theAngle).ToString("F1");
+		wIssuedAt = System.DateTime.Now.Ticks / 10000;
+		requestThrottleValue();
+	}
+	
+/*
+	if (rigidbody.velocity.magnitude > 0.1) {
+		gameObject.Find("player_graphic").animation.wrapMode = WrapMode.Loop;
+		gameObject.Find("player_graphic").animation.Play();
+	} else {
+		gameObject.Find("player_graphic").animation.wrapMode = WrapMode.Once;
+	}
+*/
+}
+
+
+function requestThrottleValue() {
+	var url = "https://api.spark.io/v1/devices/54ff70066672524829441867/get_acc";
+	var form : WWWForm = new WWWForm();
+	form.AddField("args", "400");
+	form.AddField("access_token", "3cd6b09bb31bf6e1bf3cc0b4d8272a88d2098cf2");
+	
+	w = WWW(url, form);
+	yield w;
+	if (!String.IsNullOrEmpty(w.error))
+	{
+		print(w.error);
+	}
+	else
+	{
+		var resultString = w.text;
+		var parsed = SimpleJSON.JSON.Parse(resultString);
+//		var throttleString : string = parsed["return_value"].AsInt;
+//		print(int.TryParse(throttleString, 0));
+		
+		throttleValue = parsed["return_value"].AsInt;
+		print(throttleValue);
+//		var json = new JSON();
+//		json.serialized = resultString;
+	}
 }
 
 function ShiftGears() {
