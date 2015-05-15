@@ -10,7 +10,7 @@ function Start () {
 	for (objAlpha in checkPointArray) {
 		objAlpha.renderer.material.color.a = 0.2;
 	}
-	checkPointArray[0].renderer.material.color.a = 0.8;
+	checkPointArray[0].renderer.material.color.a = 0.6;
 	
 	//Store the starting position of the player
 	startPos = transform.position;

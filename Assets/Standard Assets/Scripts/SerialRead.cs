@@ -5,9 +5,10 @@ using System.IO.Ports;
 public class SerialRead : MonoBehaviour {
 
 	private static float angle;
+	private static float offset;
 
-	private static SerialPort sp = new SerialPort("COM6", 9600);
-
+	private static SerialPort sp = new SerialPort("COM4", 9600);
+	char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 	// Use this for initialization
 	void Start () 
 	{
@@ -22,7 +23,12 @@ public class SerialRead : MonoBehaviour {
 		{
 			try 
 			{
-				angle = float.Parse(sp.ReadLine());
+				string temp = sp.ReadLine();
+				string[] words = temp.Split(delimiterChars);
+				//print(words);
+				angle = float.Parse(words[0]);
+				offset = float.Parse(words[1])*180;
+				//angle = float.Parse(sp.ReadLine());
 			}
 			catch(System.Exception)
 			{
@@ -36,5 +42,9 @@ public class SerialRead : MonoBehaviour {
 		return angle;
 	}
 
+	public static float getOffset()
+	{
+		return offset;
+	}
 
 }

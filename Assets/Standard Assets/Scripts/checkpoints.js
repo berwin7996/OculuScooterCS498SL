@@ -1,12 +1,16 @@
 
 static var playerTransform : Transform; //Store the player transform
+static var checkpointTest : TextMesh;
 
 function Start () {
+	// print("start HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD");
 	playerTransform = gameObject.Find("Player").transform; //Set the player transform
+	checkpointTest = gameObject.Find("3dtext").GetComponent(TextMesh); //Set the player transform
 }
 
 function OnTriggerEnter (other : Collider) {
 	//Is it the Player who enters the collider?
+	// print("HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD");
 	if (!other.CompareTag("Player")) 
 		return; //If it's not the player dont continue
 		
@@ -24,7 +28,11 @@ function OnTriggerEnter (other : Collider) {
 		}
 		visualAid(); //Run a coroutine to update the visual aid of our Checkpoints
 		//Update the 3dtext
-		Camera.main.GetComponentInChildren(TextMesh).text = "Checkpoint: "+(CarCheckpoint.currentCheckpoint)+" Lap: "+(CarCheckpoint.currentLap);
+		// Camera.main.GetComponentInChildren(TextMesh).text = "Checkpoint: "+(CarCheckpoint.currentCheckpoint)+" Lap: "+(CarCheckpoint.currentLap);
+		// var blah : TextMesh;
+		// blah = gameObject.Find("3dtext");
+		checkpointTest.text = "Checkpoint: "+(CarCheckpoint.currentCheckpoint)+" Lap: "+(CarCheckpoint.currentLap);
+		// print("Checkpoint: "+(CarCheckpoint.currentCheckpoint)+" Lap: "+(CarCheckpoint.currentLap));
 	}
 }
 
@@ -33,5 +41,5 @@ function visualAid () {
 	for (objAlpha in playerTransform.GetComponent(CarCheckpoint).checkPointArray) {
 		objAlpha.renderer.material.color.a = 0.2;
 	}
-	playerTransform.GetComponent(CarCheckpoint).checkPointArray[CarCheckpoint.currentCheckpoint].renderer.material.color.a = 0.8;
+	playerTransform.GetComponent(CarCheckpoint).checkPointArray[CarCheckpoint.currentCheckpoint].renderer.material.color.a = 0.6;
 }
